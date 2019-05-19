@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from "react-redux";
+import BookList from "./BookList";
+import { getBooks } from "../../actions"
 
 class MemberHome extends React.Component {
     constructor(){
@@ -8,12 +11,27 @@ class MemberHome extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.props.getBooks();
+    }
+
     render(){
         return(
-            <div>You've reached a secured area</div>
+            <div>
+                <h1>You've reached a secured area</h1>
+                <BookList books={this.props.books} />
+            </div>
         )
     }
     
 }
 
-export default MemberHome;
+const mapStateToProps = state => ({
+    books : state.books
+})
+
+
+export default connect(
+    mapStateToProps,
+    { getBooks }
+)(MemberHome) ;
