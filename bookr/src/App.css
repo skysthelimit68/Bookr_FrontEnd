@@ -31,3 +31,16 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  width:1220px;
+  margin: 100px auto 0;
+}
+
+header {
+  width:100%;
+  box-shadow:0 0 5px #00000030;
+  position:fixed;
+  top:0;
+  z-index:1;
+}

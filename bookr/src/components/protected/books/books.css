@@ -1,0 +1,10 @@
+.booklist {
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.bookcard {
+    margin: 10px;
+    width:100%;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import BookList from "./BookList";
+import BookList from "./books/BookList";
 import { getBooks } from "../../actions"
 
 class MemberHome extends React.Component {
@@ -17,7 +17,7 @@ class MemberHome extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="container memberHome">
                 <h1>You've reached a secured area</h1>
                 <BookList books={this.props.books} />
             </div>
