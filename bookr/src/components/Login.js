@@ -3,22 +3,39 @@ import MemberForm from './MemberForm'
 import { login } from "../actions";
 import { connect } from "react-redux"
 
-const Login = props => {
+class Login extends React.Component {
 
-    const handleLogin = creds => {
-        props.login(creds)
-        .then(() => props.history.push('/member-area'))     
+    componentDidMount() {
+        if (localStorage.getItem("token")) {
+            this.props.history.push('/member-area');
+        }
     }
 
-    return (
-        <div className="container">
-            <h2>Sign in</h2>
-            <MemberForm newUser={false} login={handleLogin}/>
-        </div>
-    )
+    handleLogin = creds => {
+        this.props.login(creds)
+            .then(() => this.props.history.push('/member-area'))
+    }
+    render() {
+        return (
+            <div className="fullpage_wrap fullpage_prompt">
+                <div className="container signupLogin">
+                    <div className="signup_wrapper">
+                    <div className="form_wrapper form_left">
+                        <h2>Sign in to account</h2>
+                        <MemberForm newUser={false} login={this.handleLogin} />
+                    </div>
+                    <div className="prompt_right">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
 }
 
 export default connect(
     null,
     { login }
-)(Login) ;
+)(Login);
+

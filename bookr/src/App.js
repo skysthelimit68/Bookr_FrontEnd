@@ -19,7 +19,8 @@ class App extends React.Component {
      <div className="app">
        <header>
          <h1>Bookr</h1>
-         <button onClick={this.logout}>Logout</button>
+         {localStorage.getItem("token") ? 
+         <button onClick={this.logout}>Logout</button> : null}
        </header>
        <Route path="/login" component={Login}/>
        <Route path="/signup" component={Signup}/>

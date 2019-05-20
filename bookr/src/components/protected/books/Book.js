@@ -27,8 +27,9 @@ class Book extends React.Component {
 
         return (
             <div>
-                <Paper className={classes.root} elevation={1}>
+                <Paper className={`${classes.root} bookpage`}elevation={1}>
                      <BookDetail id={this.state.id} />
+                     <div className="addReviewButton">Add Review</div>
                 </Paper>
                 </div>
            

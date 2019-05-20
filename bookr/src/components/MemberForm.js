@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 
 const styles = theme => ({
@@ -18,6 +20,12 @@ const styles = theme => ({
         menu: {
           width: 200,
         },
+        button: {
+            margin: theme.spacing.unit,
+          },
+          input: {
+            display: 'none',
+          },
       });
 
 
@@ -74,7 +82,7 @@ class MemberForm extends React.Component {
             <form onSubmit={this.handleSubmit} className={classes.container} noValidate autoComplete="off">
                 {this.state.newUser ? <TextField
                     label="Name"
-                    className={classes.textField}
+                    className={`${classes.textField} form_input`}
                     type="text"
                     name="name"
                     value={this.state.name}
@@ -84,8 +92,8 @@ class MemberForm extends React.Component {
                     variant="outlined"
                 /> : null}
                 <TextField
-                    label="UserName"
-                    className={classes.textField}
+                    label="User Name"
+                    className={`${classes.textField} form_input`}
                     type="text"
                     name="username"
                     value={this.state.username}
@@ -96,7 +104,7 @@ class MemberForm extends React.Component {
                 />
                 {this.state.newUser ? <TextField
                     label="Email"
-                    className={classes.textField}
+                    className={`${classes.textField} form_input`}
                     type="email"
                     name="email"
                     value={this.state.email}
@@ -108,7 +116,7 @@ class MemberForm extends React.Component {
                 }
                 <TextField
                     label="Password"
-                    className={classes.textField}
+                    className={`${classes.textField} form_input`}
                     type="password"
                     name="password"
                     value={this.state.password}
@@ -117,7 +125,10 @@ class MemberForm extends React.Component {
                     margin="normal"
                     variant="outlined"
                 />
-                <button type="submit">{this.state.newUser? "Sign me up!" : "Sign me in!"}</button>
+                <Button type="submit" variant="outlined" className={`${classes.button} form_button`}>
+                    {this.state.newUser? "Sign me up!" : "Sign me in!"}
+                </Button>
+                
             </form>
         )
     }

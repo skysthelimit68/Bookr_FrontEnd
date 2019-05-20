@@ -42,6 +42,14 @@
   
 }
 
+.signupLogin {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: calc(100vh - 100px);
+  flex-wrap: wrap;
+}
+
 header {
   width:100%;
   box-shadow:0 0 5px #00000030;
@@ -50,4 +58,12 @@ header {
   z-index:1;
   background:white;
   height:80px;
+}
+
+.fullpage_wrap {
+  width:100%;
+}
+
+.fullpage_prompt {
+  background: url("https://images.pexels.com/photos/5710/books-colorful-harry-potter.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
 }
