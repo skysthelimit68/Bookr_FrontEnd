@@ -9,6 +9,13 @@
     width:100%;
 }
 
+.bookcard a{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+
 .bookcard .dv-star-rating {
     font-size: 1.5rem;
 }
+

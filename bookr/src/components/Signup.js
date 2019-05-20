@@ -13,7 +13,7 @@ const Signup = props => {
     
     
     return (
-        <div>
+        <div className="container">
             <h2>Sign up</h2>
             <MemberForm newUser={true} signup={handleSignup}/>
             </div>

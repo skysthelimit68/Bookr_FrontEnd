@@ -9,6 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import StarRatingComponent from 'react-star-rating-component';
+import { Link } from "react-router-dom"
 
 
 const styles = {
@@ -23,8 +24,11 @@ const styles = {
 const BookCard = props => {
     const { classes } = props;
     const avgStars = props.book.stars.reduce((a,b) => a + b, 0) / props.book.stars.length
+    
     return(
+        
         <Card className={`${classes.card} bookcard`}>
+        <Link to={`/member-area/book/${props.book.id}`}>
             <CardActionArea>
                 <CardMedia
                 className={classes.media}
@@ -43,18 +47,11 @@ const BookCard = props => {
                     starCount={5}
                     value={avgStars}
                 />
-              
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                Share
-                </Button>
-                <Button size="small" color="primary">
-                Learn More
-                </Button>
-            </CardActions>
+            </Link>
         </Card>
+        
     )
 }
 
@@ -68,4 +65,15 @@ export default withStyles(styles)(BookCard);
 <Typography component="p">
     {props.book.shortDescription}
 </Typography>
+*/
+
+/*
+<CardActions>
+                <Button size="small" color="primary">
+                Share
+                </Button>
+                <Button size="small" color="primary">
+                Learn More
+                </Button>
+            </CardActions>
 */

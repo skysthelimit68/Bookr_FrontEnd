@@ -7,13 +7,11 @@ const Login = props => {
 
     const handleLogin = creds => {
         props.login(creds)
-        .then(() => props.history.push('/member-area'))
-
-        
+        .then(() => props.history.push('/member-area'))     
     }
 
     return (
-        <div>
+        <div className="container">
             <h2>Sign in</h2>
             <MemberForm newUser={false} login={handleLogin}/>
         </div>

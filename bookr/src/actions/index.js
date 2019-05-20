@@ -60,3 +60,23 @@ export const getBooks = () => dispatch => {
         })
     )
 }
+
+export const FETCHBOOK_START = "FETCHBOOK_START";
+export const FETCHBOOK_SUCCESS = "FETCHBOOK_SUCCESS";
+export const FETCHBOOK_FAIL = "FETCHBOOK_FAIL";
+
+export const fetchBook = id => dispatch => {
+    dispatch({ type : FETCHBOOK_START })
+    console.log(id)
+    return (
+        axiosWithAuth().get(`http://localhost:5000/api/books/${id}`)
+        .then( res => {
+            dispatch({ type : FETCHBOOK_SUCCESS, payload: res.data})
+            console.log(res.data)
+        })
+        .catch( err => {
+            dispatch({ type : FETCHBOOK_FAIL , payload : err})
+            console.log(err)
+        })
+    )
+}

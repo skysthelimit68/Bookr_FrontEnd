@@ -1,16 +1,18 @@
 import { SIGNUP_START, SIGNUP_FAIL, SIGNUP_SUCCESS,
 LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
-GETBOOKS_START, GETBOOKS_SUCCESS, GETBOOKS_FAIL } from "../actions";
-
+GETBOOKS_START, GETBOOKS_SUCCESS, GETBOOKS_FAIL,
+FETCHBOOK_START, FETCHBOOK_SUCCESS, FETCHBOOK_FAIL } from "../actions";
 
 const initialState = {
     books : [],
     users : [],
     member : {},
+    activeBook : {},
     error : "",
     signingUp : false,
     logginIn : false,
     gettingBooks : false,
+    fetchingBook: false,
     token : ""
 
 }
@@ -85,7 +87,27 @@ const reducer = (state = initialState, action) => {
                 gettingBooks : false,
                 error : action.payload
             }
-
+//--------FETCHBOOK-------//
+         case FETCHBOOK_START:
+            return {
+                ...state,
+                fetchingBook : true,
+                error:""
+            }
+         case FETCHBOOK_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                fetchingBook : false,
+                activeBook : action.payload
+            }
+         case FETCHBOOK_FAIL:   
+            console.log(action.payload)
+            return {
+                ...state,
+                retchingBook : false,
+                error : action.payload
+            }
 
         default:
             return state
