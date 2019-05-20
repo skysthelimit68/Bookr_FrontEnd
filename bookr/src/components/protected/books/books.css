@@ -8,3 +8,7 @@
     margin: 10px;
     width:100%;
 }
+
+.bookcard .dv-star-rating {
+    font-size: 1.5rem;
+}

@@ -8,6 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import StarRatingComponent from 'react-star-rating-component';
+
 
 const styles = {
     card: {
@@ -20,6 +22,7 @@ const styles = {
 
 const BookCard = props => {
     const { classes } = props;
+    const avgStars = props.book.stars.reduce((a,b) => a + b, 0) / props.book.stars.length
     return(
         <Card className={`${classes.card} bookcard`}>
             <CardActionArea>
@@ -35,7 +38,11 @@ const BookCard = props => {
                 <Typography gutterBottom variant="h7" component="h3">
                     by {props.book.author}
                 </Typography>
-
+                <StarRatingComponent 
+                    name="rate1" 
+                    starCount={5}
+                    value={avgStars}
+                />
               
                 </CardContent>
             </CardActionArea>
