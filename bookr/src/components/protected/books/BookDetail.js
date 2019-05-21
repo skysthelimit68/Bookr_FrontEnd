@@ -1,4 +1,6 @@
 import React from "react";
+import compose from 'recompose/compose';
+
 import { connect } from "react-redux";
 import { fetchBook } from "../../../actions";
 import PropTypes from 'prop-types';
@@ -6,6 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import StarRatingComponent from 'react-star-rating-component';
+import BookReviews from './BookReviews';
+
 
 
 const styles = theme => ({
@@ -21,23 +25,17 @@ class BookDetail extends React.Component {
         super(props);
         this.state = {
             id: props.id,
-            avgStars : 0
+            
         }
     }
 
-    
-
-    componentDidMount() {
-        this.props.fetchBook(this.state.id)
-        .then( () => this.setState({ 
-            avgStars : this.props.activeBook.stars.reduce((a,b) => a + b, 0) / this.props.activeBook.stars.length
-        }))
-        
+    componentWillMount() {
+        this.props.fetchBook(this.state.id)   
     }
-
-
+    
     render() {
-         
+        if(!this.props.activeBook.reviews || !this.props.activeBook.stars) return (<div>Book is loading...</div>)
+        
         return (
             <div>
                 <div className="bookpage_img_wrapper">
@@ -46,7 +44,7 @@ class BookDetail extends React.Component {
                     <StarRatingComponent 
                         name="stars" 
                         starCount={5}
-                        value={this.state.avgStars}
+                        value={this.props.activeBook.stars.reduce((a,b) => a + b, 0) / this.props.activeBook.stars.length}
                     />
                     </div>
                     
@@ -61,8 +59,11 @@ class BookDetail extends React.Component {
                     <Typography component="p">
                         {this.props.activeBook.description}
                     </Typography>
+                   
                 </div>
-            
+                <div className="bookpage_reviews_wrapper">
+                    <BookReviews reviews={this.props.activeBook.reviews} />
+                </div>
             </div>
                 
             )
@@ -76,9 +77,17 @@ const mapStateToProps = state => ({
 
 BookDetail.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
 
+
+export default compose(
+    withStyles(styles, { name: 'BookDetail' }),
+    connect(mapStateToProps, {fetchBook})
+  )(BookDetail)
+
+/*
 export default connect(
     mapStateToProps,
     { fetchBook }
-)(withStyles(styles)(BookDetail));
+)(withStyles(styles)(BookDetail))
+*/
