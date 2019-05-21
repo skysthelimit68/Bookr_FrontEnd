@@ -23,7 +23,7 @@ const styles = {
 
 const BookCard = props => {
     const { classes } = props;
-    const avgStars = props.book.stars.reduce((a,b) => a + b, 0) / props.book.stars.length
+    //const avgStars = props.book.stars.reduce((a,b) => a + b, 0) / props.book.stars.length
     
     return(
         
@@ -32,7 +32,7 @@ const BookCard = props => {
             <CardActionArea>
                 <CardMedia
                 className={classes.media}
-                image={props.book.img}
+                image={props.book.cover_url}
                 title={props.book.title}
                 />
                 <CardContent>
@@ -45,7 +45,7 @@ const BookCard = props => {
                 <StarRatingComponent 
                     name="rate1" 
                     starCount={5}
-                    value={avgStars}
+                    value={props.book.average}
                 />
                 </CardContent>
             </CardActionArea>

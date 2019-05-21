@@ -49,13 +49,15 @@ export const GETBOOKS_FAIL = "GETBOOKS_FAIL";
 export const getBooks = () => dispatch => {
     dispatch({ type : GETBOOKS_START })
     return (
-        axiosWithAuth().get("http://localhost:5000/api/books")
+        //axiosWithAuth().get("https://lambda-bookr.heroku.com/api/books")
+        axios
+        .get("http://localhost:3500/api/books")
         .then( res => {
             dispatch({ type : GETBOOKS_SUCCESS, payload : res.data})
             console.log(res)
         })
         .catch( err => {
-            dispatch({ type : GETBOOKS_FAIL, payload : err})
+            //dispatch({ type : GETBOOKS_FAIL, payload : err})
             console.log(err)
         })
     )
@@ -69,7 +71,9 @@ export const fetchBook = id => dispatch => {
     dispatch({ type : FETCHBOOK_START })
     console.log(id)
     return (
-        axiosWithAuth().get(`http://localhost:5000/api/books/${id}`)
+       // axiosWithAuth().get(`http://localhost:5000/api/books/`)
+        axios
+        .get(`http://localhost:3500/api/books/${id}`)
         .then( res => {
             dispatch({ type : FETCHBOOK_SUCCESS, payload: res.data})
             console.log(res.data)
@@ -79,4 +83,26 @@ export const fetchBook = id => dispatch => {
             console.log(err)
         })
     )
+}
+
+export const POSTREVIEW_START = "POSTREVIEW_START";
+export const POSTREVIEW_SUCCESS = "POSTREVIEW_SUCCESS";
+export const POSTREVIEW_FAIL = "POSTREVIEW_FAIL";
+
+export const postReview = review => dispatch => {
+    dispatch ({ type : POSTREVIEW_START })
+    console.log("from postReview action", review)
+    return (
+        // axiosWithAuth().get(`http://localhost:5000/api/books/`)
+         axios
+         .post(`http://localhost:3500/api/reviews/`, review)
+         .then( res => {
+             console.log("post review res: ", res)
+             dispatch({ type : POSTREVIEW_SUCCESS, payload: res.data})
+         })
+         .catch( err => {
+            dispatch({ type : POSTREVIEW_FAIL , payload : err})
+             console.log(err)
+         })
+     )
 }

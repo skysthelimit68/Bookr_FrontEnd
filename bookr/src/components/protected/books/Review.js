@@ -4,14 +4,14 @@ import StarRatingComponent from 'react-star-rating-component';
 
 const Review = props => {
     return(
-        <div>
-            <p>{props.review.reviewer} {" "} 
+        <div key={props.review.id}>
+            <p>{props.review.username} {" "}</p>
             <StarRatingComponent 
                 name="stars" 
                 starCount={5}
-                value={props.review.stars}
-            /></p>
-        {props.review.review ? props.review.review : null }</div>
+                value={props.review.rating}
+            />
+        {props.review.comment ? props.review.comment : null }</div>
     )
 }
 

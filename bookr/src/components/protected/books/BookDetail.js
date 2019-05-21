@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import StarRatingComponent from 'react-star-rating-component';
 import BookReviews from './BookReviews';
+import ReviewForm from './ReviewForm';
 
 
 
@@ -32,37 +33,45 @@ class BookDetail extends React.Component {
     componentWillMount() {
         this.props.fetchBook(this.state.id)   
     }
+
+    fetchBookAfterReview = id => {
+        this.props.fetchBook(id)
+    }
     
     render() {
-        if(!this.props.activeBook.reviews || !this.props.activeBook.stars) return (<div>Book is loading...</div>)
+        if(!this.props.activeBook.authors || !this.props.activeBook.reviews) return (<div>Book is loading...</div>)
         
         return (
             <div>
                 <div className="bookpage_img_wrapper">
-                    <img src={this.props.activeBook.img} />
+                    <img src={this.props.activeBook.cover_url} />
                     <div className="star_rating">
-                    <StarRatingComponent 
-                        name="stars" 
-                        starCount={5}
-                        value={this.props.activeBook.stars.reduce((a,b) => a + b, 0) / this.props.activeBook.stars.length}
-                    />
+                        <StarRatingComponent 
+                            name="stars" 
+                            starCount={5}
+                            //value={this.props.activeBook.stars.reduce((a,b) => a + b, 0) / this.props.activeBook.stars.length}
+                            value={this.props.activeBook.average}
+                        />
                     </div>
-                    
-                </div>
+                </div> 
+                
                 <div className="bookpage_desc_wrapper">
                     <Typography variant="h5" component="h3">
                         {this.props.activeBook.title}
                     </Typography>
                     <Typography variant="h5" component="h5">
-                        {this.props.activeBook.author}
+                        {this.props.activeBook.authors.map( author => <span key={author.name}> {author.name} {' '} </span>)}
                     </Typography>
                     <Typography component="p">
                         {this.props.activeBook.description}
                     </Typography>
                    
                 </div>
+                <div>
+                    <ReviewForm id={this.state.id} fetchBookWithNewReview={this.fetchBookAfterReview}/>
+                </div>
                 <div className="bookpage_reviews_wrapper">
-                    <BookReviews reviews={this.props.activeBook.reviews} />
+                    <BookReviews id={this.state.id}  />
                 </div>
             </div>
                 

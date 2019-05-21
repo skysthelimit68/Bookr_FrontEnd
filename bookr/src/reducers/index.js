@@ -1,7 +1,8 @@
 import { SIGNUP_START, SIGNUP_FAIL, SIGNUP_SUCCESS,
 LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
 GETBOOKS_START, GETBOOKS_SUCCESS, GETBOOKS_FAIL,
-FETCHBOOK_START, FETCHBOOK_SUCCESS, FETCHBOOK_FAIL } from "../actions";
+FETCHBOOK_START, FETCHBOOK_SUCCESS, FETCHBOOK_FAIL,
+POSTREVIEW_START, POSTREVIEW_SUCCESS, POSTREVIEW_FAIL } from "../actions";
 
 const initialState = {
     books : [],
@@ -52,11 +53,13 @@ const reducer = (state = initialState, action) => {
                 error : "",
             }
         case LOGIN_SUCCESS:
-            console.log(action.payload)
+            console.log(action.payload[1])
+            
             return {
                 ...state,
                 logginIn : false,
-                token : action.payload
+                token : action.payload[0],
+                member : action.payload[1]
             }
         case LOGIN_FAIL:
             console.log(action.payload)
@@ -108,7 +111,26 @@ const reducer = (state = initialState, action) => {
                 retchingBook : false,
                 error : action.payload
             }
-
+//--------POSTREVIEW--------//
+        case POSTREVIEW_START:
+            return {
+                ...state,
+                error:""
+            } 
+        case POSTREVIEW_SUCCESS:
+            //console.log("current active book reviews", state.activeBook.reviews)
+           // const updatedActiveBook = state.activeBook.reviews.push(action.payload)
+            //console.log(updatedActiveBook)
+            return {
+                ...state,
+//                activeBook : updatedActiveBook
+            }
+            
+        case POSTREVIEW_FAIL: 
+            return {
+                ...state,
+                error: action.payload
+            }
         default:
             return state
     }
