@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import BookReviews from './BookReviews';
 
 const styles = theme => ({
     root: {
@@ -27,11 +28,17 @@ class Book extends React.Component {
 
         return (
             <div>
-                <Paper className={`${classes.root} bookpage`}elevation={1}>
+                <Paper className={`${classes.root} bookpage_full`}elevation={1}>
                      <BookDetail id={this.state.id} />
                      <div className="addReviewButton">Add Review</div>
                 </Paper>
+                <div className="bookpage_reviews_wrapper">
+                    <BookReviews id={this.state.id}/>
                 </div>
+
+
+
+            </div>
            
         )
     }

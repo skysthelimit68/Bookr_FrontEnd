@@ -19,13 +19,13 @@
     font-size: 1.5rem;
 }
 
-.bookpage {
+.bookpage_full {
     width:100%;
     max-width:980px;
     margin: 0 auto;
 }
 
-.bookpage .star_rating { 
+.bookpage_full .star_rating { 
     float:right;
     font-size:1.5rem;
     margin-top:10px;
@@ -51,6 +51,11 @@
     vertical-align: top;
     padding-top: 30px;
     margin-left: 50px;
+}
+
+.bookpage_reviews_wrapper {
+    width:100%;
+    max-width: 700px;
 }
 
 .addReviewButton {
